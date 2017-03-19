@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Container for FileSystemObjectInterface
+ * Container for DummyDirectory
  *
  * PHP Version 7
  *
@@ -16,7 +16,7 @@
 namespace emeraldinspirations\library\fileSystemAbstraction;
 
 /**
- * Most basic I/O object
+ * A dummy directory
  *
  * @category  Library
  * @package   Lib-filesystemabstraction
@@ -26,14 +26,25 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  * @version   GIT: $Id$ In Development.
  * @link      https://github.com/emeraldinspirations/lib-filesystemabstraction
  */
-interface DirectoryInterface extends
-    FileSystemObjectInterface,
-    \IteratorAggregate,
-    \ArrayAccess
+class DummyDirectory implements DirectoryInterface
 {
 
-    function newChildFile(string $Name) : FileInterface;
-    function newChildDirectory(string $Name) : DirectoryInterface;
-    function isRootDirectory() : bool;
+    function getParentDirectory() : FileSystemObjectInterface {}
+
+    /**
+     * Returns if File/Directory/Link exists
+     *
+     * @return bool If object exists
+     */
+    function isExsisting() : bool{}
+    function getName() : string {}
+    function newChildFile(string $Name) : FileInterface {}
+    function newChildDirectory(string $Name) : DirectoryInterface {}
+    function isRootDirectory() : bool {}
+    function offsetExists($Offset) : bool {}
+    function offsetGet($Offset) : FileSystemObjectInterface {}
+    function offsetUnset($Offset) {}
+    function offsetSet($Offset, $Value) {}
+    function getIterator() : Traversable {}
 
 }
