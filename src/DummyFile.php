@@ -28,30 +28,40 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  */
 class DummyFile implements FileInterface
 {
+    public $Contents;
 
-    function getParentDirectory() : FileSystemObjectInterface
+    public function getParentDirectory() : FileSystemObjectInterface
     {
 
     }
 
-    function isExsisting() : bool
+    public function isExsisting() : bool
     {
 
     }
 
-    function getContents() : string
+    public function getContents() : string
     {
 
     }
-
-    function setContents(string $Data)
+    
+    /**
+     * Set the contents of the file
+     *
+     * @param string $Data The new contents of the file
+     *
+     * @todo No exceptions yet handled
+     *
+     * @return void
+     */
+    public function setContents(string $Data)
     {
-
+        $this->Contents = $Data;
     }
 
-    function getName() : string
+    public function getName() : string
     {
-        
+
     }
 
 }

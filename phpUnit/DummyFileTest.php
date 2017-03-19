@@ -75,6 +75,26 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Verifies dummy file has data that can be set
+     *
+     * @return void
+     */
+    public function testSetContents()
+    {
+        $this->object->Contents = microtime();
+        // Fails if DummyFile::Contents does not exist
 
+        $NewContents = microtime().'NewContents';
+
+        $this->object->setContents($NewContents);
+
+        $this->assertEquals(
+            $NewContents,
+            $this->object->Contents,
+            'Fails if contents not set'
+        );
+
+    }
 
 }
