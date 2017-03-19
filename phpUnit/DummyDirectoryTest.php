@@ -37,13 +37,24 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
+     * Storage for directory's name
+     *
+     * @var string
+     */
+    protected $DirectoryName;
+
+    /**
      * Run before each test
      *
      * @return void
      */
     protected function setUp()
     {
-        $this->object = new DummyDirectory();
+        $this->DirectoryName = microtime();
+
+        $this->object = new DummyDirectory(
+            $this->DirectoryName
+        );
     }
 
     /**
@@ -84,6 +95,91 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
             $this->object,
             'Fails if class does not implement ArrayAccess'
         );
+
+    }
+
+    /**
+     * Verifies the file name is passed through the constructor and returned
+     * via getName
+     *
+     * @return null
+     */
+    public function testGetName()
+    {
+
+        $this->assertEquals(
+            $this->DirectoryName,
+            $this->object->getName(),
+            'Fails if function not defined, value not retained, or value not'
+            . ' returned'
+        );
+
+    }
+}
+
+/**
+ * Mock FileInterface
+ *
+ * @category  Library
+ * @package   Lib-filesystemabstraction
+ * @author    Matthew "Juniper" Barlett <emeraldinspirations@gmail.com>
+ * @copyright 2017 Matthew "Juniper" Barlett <emeraldinspirations@gmail.com>
+ * @license   TBD ../LICENSE.md
+ * @version   GIT: $Id$ In Development.
+ * @link      https://github.com/emeraldinspirations/lib-filesystemabstraction
+ */
+class DummyDirectoryTest_MockFile implements FileInterface
+{
+
+    /**
+     * Mock getParentDirectory
+     *
+     * @return DirectoryInterface
+     */
+    public function getParentDirectory() : DirectoryInterface
+    {
+
+    }
+
+    /**
+     * Mock isExsisting
+     *
+     * @return bool
+     */
+    public function isExsisting() : bool
+    {
+
+    }
+
+    /**
+     * Mock getContents
+     *
+     * @return string
+     */
+    public function getContents() : string
+    {
+
+    }
+
+    /**
+     * Mock setContents
+     *
+     * @param string $Data MockParam
+     *
+     * @return void
+     */
+    public function setContents(string $Data)
+    {
+
+    }
+
+    /**
+     * Mock getName
+     *
+     * @return string
+     */
+    public function getName() : string
+    {
 
     }
 
