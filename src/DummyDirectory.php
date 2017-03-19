@@ -48,6 +48,13 @@ class DummyDirectory implements DirectoryInterface
      * @return bool If object exists
      */
     function isExsisting() : bool{}
+    function newChildFile(string $Name) : FileInterface {}
+    function newChildDirectory(string $Name) : DirectoryInterface {}
+    function offsetExists($Offset) : bool {}
+    function offsetGet($Offset) : FileSystemObjectInterface {}
+    function offsetUnset($Offset) {}
+    function offsetSet($Offset, $Value) {}
+    function getIterator() : Traversable {}
 
     /**
      * Return the name of the directory
@@ -59,19 +66,22 @@ class DummyDirectory implements DirectoryInterface
         return $this->Name;
     }
 
-    function newChildFile(string $Name) : FileInterface {}
-    function newChildDirectory(string $Name) : DirectoryInterface {}
-    function isRootDirectory() : bool {}
-    function offsetExists($Offset) : bool {}
-    function offsetGet($Offset) : FileSystemObjectInterface {}
-    function offsetUnset($Offset) {}
-    function offsetSet($Offset, $Value) {}
-    function getIterator() : Traversable {}
+    /**
+     * Returns if directory is root directory
+     *
+     * @return bool
+     */
+    function isRootDirectory() : bool
+    {
+        return is_null($this->ParentDirectory);
+    }
 
     /**
      * Construct a new DummyFile object
      *
-     * @param string $Name The name of the directory
+     * @param string             $Name            The name of the directory
+     * @param DirectoryInterface $ParentDirectory (Optional) The parent
+     *                                            directory of the directory.
      */
     public function __construct(
         string $Name,

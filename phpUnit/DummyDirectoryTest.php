@@ -143,6 +143,26 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
         );
 
     }
+
+    /**
+     * Verifies directory can be root
+     *
+     * @return void
+     */
+    public function testIsRootDirectory()
+    {
+
+        $this->assertFalse(
+            $this->object->isRootDirectory(),
+            'Fails if function not defined, or not returning a value'
+        );
+
+        $this->assertTrue(
+            $this->object->getParentDirectory()->isRootDirectory(),
+            'Fails if function always returns false'
+        );
+
+    }
 }
 
 /**

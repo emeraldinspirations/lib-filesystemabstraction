@@ -34,6 +34,12 @@ interface DirectoryInterface extends
 
     function newChildFile(string $Name) : FileInterface;
     function newChildDirectory(string $Name) : DirectoryInterface;
+
+    /**
+     * Returns if directory is root directory
+     *
+     * @return bool
+     */
     function isRootDirectory() : bool;
 
 }
