@@ -29,6 +29,7 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 class DummyFile implements FileInterface
 {
     public $Contents;
+    protected $Name;
 
     public function getParentDirectory() : FileSystemObjectInterface
     {
@@ -75,9 +76,24 @@ class DummyFile implements FileInterface
         $this->Contents = $Data;
     }
 
+    /**
+     * Return the name of the file
+     *
+     * @return string File name
+     */
     public function getName() : string
     {
-        //TODO: Not yet implemented
+        return $this->Name;
+    }
+
+    /**
+     * Construct a new DummyFile object
+     *
+     * @param string $Name The name of the file
+     */
+    public function __construct(string $Name)
+    {
+        $this->Name = $Name;
     }
 
 }

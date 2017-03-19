@@ -38,6 +38,11 @@ interface FileSystemObjectInterface
      */
     function isExsisting() : bool;
 
+    /**
+     * Returns File/Directory/Link name
+     *
+     * @return string FileSystemObject name
+     */
     function getName() : string;
 
 }

@@ -37,13 +37,21 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
+     * Storage for file's name
+     *
+     * @var string
+     */
+    protected $FileName;
+
+    /**
      * Run before each test
      *
      * @return void
      */
     protected function setUp()
     {
-        $this->object = new DummyFile();
+        $this->FileName = microtime();
+        $this->object = new DummyFile($this->FileName);
     }
 
     /**
@@ -139,6 +147,24 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(
             $this->object->isExsisting(),
             'Fails if function returns false regardless of existance'
+        );
+
+    }
+
+    /**
+     * Verifies the file name is passed through the constructor and returned
+     * via getName
+     *
+     * @return null
+     */
+    public function testGetName()
+    {
+
+        $this->assertEquals(
+            $this->FileName,
+            $this->object->getName(),
+            'Fails if function not defined, value not retained, or value not'
+            . ' returned'
         );
 
     }
