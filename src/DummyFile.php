@@ -30,10 +30,16 @@ class DummyFile implements FileInterface
 {
     public $Contents;
     protected $Name;
+    protected $ParentDirectory;
 
-    public function getParentDirectory() : FileSystemObjectInterface
+    /**
+     * Return the parent directory of the file
+     *
+     * @return DirectoryInterface The parent directory
+     */
+    public function getParentDirectory() : DirectoryInterface
     {
-        // TODO: Not yet implemented
+        return $this->ParentDirectory;
     }
 
     /**
@@ -89,11 +95,16 @@ class DummyFile implements FileInterface
     /**
      * Construct a new DummyFile object
      *
-     * @param string $Name The name of the file
+     * @param string             $Name            The name of the file
+     * @param DirectoryInterface $ParentDirectory The parent directory of the
+     *                                            file.
      */
-    public function __construct(string $Name)
-    {
+    public function __construct(
+        string $Name,
+        DirectoryInterface $ParentDirectory
+    ) {
         $this->Name = $Name;
+        $this->ParentDirectory = $ParentDirectory;
     }
 
 }

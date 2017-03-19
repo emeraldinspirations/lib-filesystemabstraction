@@ -44,6 +44,13 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
     protected $FileName;
 
     /**
+     * Storage for file's parent directory
+     *
+     * @var DirectoryInterface
+     */
+    protected $ParentDirectory;
+
+    /**
      * Run before each test
      *
      * @return void
@@ -51,7 +58,13 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->FileName = microtime();
-        $this->object = new DummyFile($this->FileName);
+        $this->ParentDirectory = new DummyFileTest_MockDirectory();
+
+        $this->object = new DummyFile(
+            $this->FileName,
+            $this->ParentDirectory
+        );
+        
     }
 
     /**
@@ -166,6 +179,163 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
             'Fails if function not defined, value not retained, or value not'
             . ' returned'
         );
+
+    }
+
+    /**
+    * Verifies the parent directory is passed through the constructor and
+    * returned via getName
+    *
+    * @return null
+     */
+    public function testGetParentDirectory()
+    {
+
+        $this->assertSame(
+            $this->ParentDirectory,
+            $this->object->getParentDirectory(),
+            'Fails if function not defined, value not retained, or value not'
+            . ' returned'
+        );
+
+    }
+
+}
+
+/**
+ * Mock DirectoryInterface
+ *
+ * @category  Library
+ * @package   Lib-filesystemabstraction
+ * @author    Matthew "Juniper" Barlett <emeraldinspirations@gmail.com>
+ * @copyright 2017 Matthew "Juniper" Barlett <emeraldinspirations@gmail.com>
+ * @license   TBD ../LICENSE.md
+ * @version   GIT: $Id$ In Development.
+ * @link      https://github.com/emeraldinspirations/lib-filesystemabstraction
+ */
+class DummyFileTest_MockDirectory implements DirectoryInterface
+{
+
+    /**
+     * Mock getParentDirectory
+     *
+     * @return DirectoryInterface
+     */
+    public function getParentDirectory() : DirectoryInterface
+    {
+
+    }
+
+    /**
+     * Mock isExsisting
+     *
+     * @return bool
+     */
+    public function isExsisting() : bool
+    {
+
+    }
+
+    /**
+     * Mock getName
+     *
+     * @return string
+     */
+    public function getName() : string
+    {
+
+    }
+
+    /**
+     * Mock newChildFile
+     *
+     * @param string $Name MockParam
+     *
+     * @return FileInterface
+     */
+    function newChildFile(string $Name) : FileInterface
+    {
+
+    }
+
+    /**
+     * Mock newChildDirectory
+     *
+     * @param string $Name MockParam
+     *
+     * @return DirectoryInterface
+     */
+    public function newChildDirectory(string $Name) : DirectoryInterface
+    {
+
+    }
+
+    /**
+     * Mock isRootDirectory
+     *
+     * @return bool
+     */
+    public function isRootDirectory() : bool
+    {
+
+    }
+
+    /**
+     * Mock offsetExists
+     *
+     * @param mixed $Offset MockParam
+     *
+     * @return bool
+     */
+    public function offsetExists($Offset) : bool
+    {
+
+    }
+
+    /**
+     * Mock offsetGet
+     *
+     * @param mixed $Offset MockParam
+     *
+     * @return FileSystemObjectInterface
+     */
+    public function offsetGet($Offset) : FileSystemObjectInterface
+    {
+
+    }
+
+    /**
+     * Mock offsetUnset
+     *
+     * @param mixed $Offset MockParam
+     *
+     * @return void
+     */
+    public function offsetUnset($Offset)
+    {
+
+    }
+
+    /**
+     * Mock offsetSet
+     *
+     * @param mixed $Offset MockParam
+     * @param mixed $Value  MockParam
+     *
+     * @return void
+     */
+    public function offsetSet($Offset, $Value)
+    {
+
+    }
+
+    /**
+     * Mock getIterator
+     *
+     * @return Traversable
+     */
+    public function getIterator() : \Traversable
+    {
 
     }
 

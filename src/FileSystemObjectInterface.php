@@ -29,7 +29,12 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 interface FileSystemObjectInterface
 {
 
-    function getParentDirectory() : FileSystemObjectInterface;
+    /**
+    * Returns File/Directory/Link's parent directory
+    *
+    * @return DirectoryInterface The parent directory
+     */
+    function getParentDirectory() : DirectoryInterface;
 
     /**
      * Returns if File/Directory/Link exists

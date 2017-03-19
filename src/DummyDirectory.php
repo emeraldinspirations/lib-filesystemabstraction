@@ -29,7 +29,7 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 class DummyDirectory implements DirectoryInterface
 {
 
-    function getParentDirectory() : FileSystemObjectInterface {}
+    function getParentDirectory() : DirectoryInterface {}
 
     /**
      * Returns if File/Directory/Link exists
