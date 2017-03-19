@@ -29,6 +29,7 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 class DummyDirectory implements DirectoryInterface
 {
 
+    public $Contents;
     protected $Name;
     protected $ParentDirectory;
 
@@ -43,11 +44,15 @@ class DummyDirectory implements DirectoryInterface
     }
 
     /**
-     * Returns if File/Directory/Link exists
+     * Returns if directory exists
      *
      * @return bool If object exists
      */
-    function isExsisting() : bool{}
+    function isExsisting() : bool
+    {
+        return ! is_null($this->Contents);
+    }
+
     function newChildFile(string $Name) : FileInterface {}
     function newChildDirectory(string $Name) : DirectoryInterface {}
     function offsetExists($Offset) : bool {}
@@ -55,6 +60,16 @@ class DummyDirectory implements DirectoryInterface
     function offsetUnset($Offset) {}
     function offsetSet($Offset, $Value) {}
     function getIterator() : Traversable {}
+
+    /**
+     * Creates directory & parents if not-existing
+     *
+     * @return void
+     */
+    public function createDirectory()
+    {
+
+    }
 
     /**
      * Return the name of the directory

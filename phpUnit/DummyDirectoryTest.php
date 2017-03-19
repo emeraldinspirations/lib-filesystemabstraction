@@ -163,6 +163,34 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
         );
 
     }
+
+    /**
+    * Verifies directory's existance is based on contents of
+    * DummyDirectory::Contents
+    *
+    * If DummyFile::Contents is null, then the directory doesn't exist
+    * If DummyFile::Contents isnot null, then the directory exists
+    *
+    * In the file system this would be replaced with a function to verify the
+    * current existance of a directory.
+    *
+    * @return void
+     */
+    public function testIsExisting()
+    {
+        $this->assertFalse(
+            $this->object->isExsisting(),
+            'Fails if function returns null'
+        );
+
+        $this->object->Contents = [];
+
+        $this->assertTrue(
+            $this->object->isExsisting(),
+            'Fails if function returns false regardless of existance'
+        );
+    }
+
 }
 
 /**

@@ -339,4 +339,14 @@ class DummyFileTest_MockDirectory implements DirectoryInterface
 
     }
 
+    /**
+     * Mock createDirectory
+     *
+     * @return void
+     */
+    public function createDirectory()
+    {
+
+    }
+    
 }

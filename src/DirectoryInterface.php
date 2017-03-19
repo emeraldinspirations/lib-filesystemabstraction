@@ -42,4 +42,13 @@ interface DirectoryInterface extends
      */
     function isRootDirectory() : bool;
 
+    /**
+     * Creates directory & parents if not-existing
+     *
+     * @todo No exceptions yet handled
+     *
+     * @return void
+     */
+    function createDirectory();
+
 }
