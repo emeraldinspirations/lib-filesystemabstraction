@@ -39,12 +39,19 @@ class DummyFile implements FileInterface
     {
 
     }
-
+    
+    /**
+     * Return the contents of the file
+     *
+     * @todo No exceptions yet handled
+     *
+     * @return string Contents of the file
+     */
     public function getContents() : string
     {
-
+        return $this->Contents;
     }
-    
+
     /**
      * Set the contents of the file
      *

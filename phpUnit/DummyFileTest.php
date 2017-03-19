@@ -97,4 +97,22 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Verifies dummy file has data that can be read
+     *
+     * @return void
+     */
+    public function testGetContents()
+    {
+        $this->object->Contents = microtime();
+        // Fails if DummyFile::Contents does not exist
+
+        $this->assertEquals(
+            $this->object->Contents,
+            $this->object->getContents(),
+            'Fails if contents not retrieved'
+        );
+
+    }
+
 }

@@ -29,6 +29,25 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 interface FileInterface extends
     FileSystemObjectInterface
 {
+
+    /**
+     * Return the contents of the file
+     *
+     * @todo No exceptions yet handled
+     *
+     * @return string Contents of the file
+     */
     function getContents() : string;
+
+    /**
+     * Set the contents of the file
+     *
+     * @param string $Data The new contents of the file
+     *
+     * @todo No exceptions yet handled
+     *
+     * @return void
+     */
     function setContents(string $Data);
+
 }
