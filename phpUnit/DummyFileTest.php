@@ -115,4 +115,32 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Verifies file's existance is based on contents of DummyFile::Contents
+     *
+     * If DummyFile::Contents is null, then the file doesn't exist
+     * If DummyFile::Contents isnot null, then the file exists
+     *
+     * In the file system this would be replaced with a function to verify the
+     * current existance of a file.
+     *
+     * @return void
+     */
+    public function testIsExisting()
+    {
+
+        $this->assertFalse(
+            $this->object->isExsisting(),
+            'Fails if function returns null'
+        );
+
+        $this->object->Contents = microtime();
+
+        $this->assertTrue(
+            $this->object->isExsisting(),
+            'Fails if function returns false regardless of existance'
+        );
+
+    }
+
 }

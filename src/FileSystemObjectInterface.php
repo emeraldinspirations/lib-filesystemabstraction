@@ -30,7 +30,14 @@ interface FileSystemObjectInterface
 {
 
     function getParentDirectory() : FileSystemObjectInterface;
+
+    /**
+     * Returns if File/Directory/Link exists
+     *
+     * @return bool If object exists
+     */
     function isExsisting() : bool;
+
     function getName() : string;
 
 }

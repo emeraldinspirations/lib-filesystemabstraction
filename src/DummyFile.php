@@ -35,11 +35,20 @@ class DummyFile implements FileInterface
 
     }
 
+    /**
+     * Returns if file exists
+     *
+     * In the dummy object, the existance of the file is determined by the
+     * value of the DummyFile::Contents property.  If Null, then the file
+     * doesn't exist.  If not null, then the file exists.
+     *
+     * @return bool If file exists
+     */
     public function isExsisting() : bool
     {
-
+        return ! is_null($this->Contents);
     }
-    
+
     /**
      * Return the contents of the file
      *
