@@ -64,7 +64,7 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
             $this->FileName,
             $this->ParentDirectory
         );
-        
+
     }
 
     /**
@@ -184,7 +184,7 @@ class DummyFileTest extends \PHPUnit_Framework_TestCase
 
     /**
     * Verifies the parent directory is passed through the constructor and
-    * returned via getName
+    * returned via getParentDirectory
     *
     * @return null
      */
