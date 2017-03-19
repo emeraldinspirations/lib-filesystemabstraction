@@ -44,6 +44,13 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
     protected $DirectoryName;
 
     /**
+     * Storage for directory's parent directory
+     *
+     * @var DirectoryInterface
+     */
+    protected $ParentDirectory;
+
+    /**
      * Run before each test
      *
      * @return void
@@ -51,9 +58,11 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->DirectoryName = microtime();
+        $this->ParentDirectory = new DummyDirectory(microtime());
 
         $this->object = new DummyDirectory(
-            $this->DirectoryName
+            $this->DirectoryName,
+            $this->ParentDirectory
         );
     }
 
@@ -110,6 +119,25 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(
             $this->DirectoryName,
             $this->object->getName(),
+            'Fails if function not defined, value not retained, or value not'
+            . ' returned'
+        );
+
+    }
+
+
+    /**
+    * Verifies the parent directory is passed through the constructor and
+    * returned via getParentDirectory
+    *
+    * @return null
+     */
+    public function testGetParentDirectory()
+    {
+
+        $this->assertSame(
+            $this->ParentDirectory,
+            $this->object->getParentDirectory(),
             'Fails if function not defined, value not retained, or value not'
             . ' returned'
         );

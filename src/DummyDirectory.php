@@ -30,8 +30,17 @@ class DummyDirectory implements DirectoryInterface
 {
 
     protected $Name;
+    protected $ParentDirectory;
 
-    function getParentDirectory() : DirectoryInterface {}
+    /**
+     * Return the parent directory of the directory
+     *
+     * @return DirectoryInterface The parent directory
+     */
+    public function getParentDirectory() : DirectoryInterface
+    {
+        return $this->ParentDirectory;
+    }
 
     /**
      * Returns if File/Directory/Link exists
@@ -65,9 +74,11 @@ class DummyDirectory implements DirectoryInterface
      * @param string $Name The name of the directory
      */
     public function __construct(
-        string $Name
+        string $Name,
+        DirectoryInterface $ParentDirectory = null
     ) {
-        $this->Name = $Name;
+        $this->Name            = $Name;
+        $this->ParentDirectory = $ParentDirectory;
     }
 
 }
