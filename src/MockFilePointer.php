@@ -28,33 +28,9 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  */
 class MockFilePointer implements FilePointerInterface
 {
-//     public $Contents;
+
     protected $Path;
     protected $FileSystem;
-//
-//     /**
-//      * Return the parent directory of the file
-//      *
-//      * @return DirectoryInterface The parent directory
-//      */
-//     public function getParentDirectory() : DirectoryInterface
-//     {
-//         return $this->ParentDirectory;
-//     }
-//
-//     /**
-//      * Returns if file exists
-//      *
-//      * In the dummy object, the existance of the file is determined by the
-//      * value of the DummyFile::Contents property.  If Null, then the file
-//      * doesn't exist.  If not null, then the file exists.
-//      *
-//      * @return bool If file exists
-//      */
-//     public function isExsisting() : bool
-//     {
-//         return ! is_null($this->Contents);
-//     }
 
     /**
      * Return the contents of the file
@@ -77,17 +53,7 @@ class MockFilePointer implements FilePointerInterface
     {
         $this->FileSystem->writeToFile($this->Path, $Data);
     }
-//
-//     /**
-//      * Return the name of the file
-//      *
-//      * @return string File name
-//      */
-//     public function getName() : string
-//     {
-//         return $this->Name;
-//     }
-//
+
     /**
      * Construct a new MockFilePointer object
      *

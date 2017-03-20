@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Container for FileSystemObjectInterface
+ * Container for FilePointerInterface
  *
  * PHP Version 7
  *
@@ -16,7 +16,7 @@
 namespace emeraldinspirations\library\fileSystemAbstraction;
 
 /**
- * Most basic I/O object
+ * A pointer to a file in a file system
  *
  * @category  Library
  * @package   Lib-filesystemabstraction
