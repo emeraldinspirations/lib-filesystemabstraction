@@ -52,4 +52,13 @@ interface FileSystemInterface
      */
     function readCompleteFile(string $Path) : string;
 
+    /**
+     * Create a directory at the specified path
+     *
+     * @param string $Path The path to the directory to be created
+     *
+     * @return void
+     */
+    function makeDirectory(string $Path);
+
 }

@@ -15,6 +15,8 @@
 
 namespace emeraldinspirations\library\fileSystemAbstraction;
 
+use \emeraldinspirations\library\fileSystemAbstraction\MockFileSystem as MFS;
+
 /**
  * Unit tests for MockDirectoryPointer
  *
@@ -37,11 +39,11 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * Storage for directory's name
+     * Storage for directory's path
      *
      * @var string
      */
-    protected $DirectoryName;
+    protected $Path;
 
     /**
      * Storage for file system
@@ -57,11 +59,11 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->DirectoryName = microtime();
+        $this->Path = microtime();
         $this->FileSystem = new MockFileSystem();
 
         $this->object = new MockDirectoryPointer(
-            $this->DirectoryName,
+            $this->Path,
             $this->FileSystem
         );
     }
@@ -86,7 +88,7 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
             $this->object,
             'Fails if class does not implement DirectoryPointerInterface'
         );
-        
+
         // $this->assertInstanceOf(
         //     FileSystemObjectInterface::class,
         //     $this->object,
@@ -192,51 +194,61 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
     //     );
     //
     // }
-    //
-    // /**
-    //  * Verifies that createDirectory creates an empty directory, and creates
-    //  * all parent directorties as needed.
-    //  *
-    //  * @return void
-    //  */
-    // public function testCreateDirectory()
-    // {
-    //     $Dir[1] = new DummyDirectory('Dir1');
-    //     $Dir[2] = new DummyDirectory('Dir2', $Dir[1]);
-    //     $Dir[3] = new DummyDirectory('Dir3', $Dir[2]);
-    //     $Dir[4] = new DummyDirectory('Dir4', $Dir[3]);
-    //
-    //     foreach ($Dir as $DirA) {
-    //         $this->assertFalse($DirA->isExsisting());
-    //     }
-    //
-    //     $Dir[4]->createDirectory();
-    //
-    //     foreach ($Dir as $DirA) {
-    //         $this->assertTrue($DirA->isExsisting());
-    //     }
-    //
-    //     $this->assertEquals(
-    //         [
-    //             $Dir[1]->Contents['Dir2']->getName(),
-    //             $Dir[2]->Contents['Dir3']->getName(),
-    //             $Dir[3]->Contents['Dir4']->getName(),
-    //         ],
-    //         [
-    //             'Dir2',
-    //             'Dir3',
-    //             'Dir4',
-    //         ]
-    //     );
-    //
-    //     $this->assertEquals(
-    //         count($Dir[1]->Contents)
-    //         + count($Dir[2]->Contents)
-    //         + count($Dir[3]->Contents)
-    //         + count($Dir[4]->Contents),
-    //         3
-    //     );
-    //
-    // }
+
+    /**
+     * Verifies that createDirectory creates an empty directory
+     *
+     * @return void
+     */
+    public function testCreateDirectory()
+    {
+        $this->object->createDirectory();
+
+        $this->assertEquals(
+            [
+                MFS::PARAM_TYPE     => MFS::TYPE_DIRECTORY,
+                MFS::PARAM_CONTENTS => [],
+            ],
+            $this->FileSystem->Contents[$this->Path],
+            'Fails when directory not created'
+        );
+
+        // $Dir[1] = new DummyDirectory('Dir1');
+        // $Dir[2] = new DummyDirectory('Dir2', $Dir[1]);
+        // $Dir[3] = new DummyDirectory('Dir3', $Dir[2]);
+        // $Dir[4] = new DummyDirectory('Dir4', $Dir[3]);
+        //
+        // foreach ($Dir as $DirA) {
+        //     $this->assertFalse($DirA->isExsisting());
+        // }
+        //
+        // $Dir[4]->createDirectory();
+        //
+        // foreach ($Dir as $DirA) {
+        //     $this->assertTrue($DirA->isExsisting());
+        // }
+        //
+        // $this->assertEquals(
+        //     [
+        //         $Dir[1]->Contents['Dir2']->getName(),
+        //         $Dir[2]->Contents['Dir3']->getName(),
+        //         $Dir[3]->Contents['Dir4']->getName(),
+        //     ],
+        //     [
+        //         'Dir2',
+        //         'Dir3',
+        //         'Dir4',
+        //     ]
+        // );
+        //
+        // $this->assertEquals(
+        //     count($Dir[1]->Contents)
+        //     + count($Dir[2]->Contents)
+        //     + count($Dir[3]->Contents)
+        //     + count($Dir[4]->Contents),
+        //     3
+        // );
+
+    }
 
 }

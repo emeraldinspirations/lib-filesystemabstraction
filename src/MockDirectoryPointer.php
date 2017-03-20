@@ -72,6 +72,7 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     //  */
     public function createDirectory()
     {
+        $this->FileSystem->makeDirectory($this->Path);
     //     if (!$this->isRootDirectory()) {
     //         $this->getParentDirectory()->createDirectory();
     //         $this->getParentDirectory()->Contents[$this->Name] = $this;

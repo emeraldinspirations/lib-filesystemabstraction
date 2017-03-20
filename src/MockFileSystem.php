@@ -55,7 +55,6 @@ class MockFileSystem implements FileSystemInterface
         ];
     }
 
-
     /**
      * Return all the data from a specified file
      *
@@ -68,6 +67,23 @@ class MockFileSystem implements FileSystemInterface
     public function readCompleteFile(string $Path) : string
     {
         return $this->Contents[$Path][self::PARAM_CONTENTS];
+    }
+
+    /**
+     * Create a directory at the specified path
+     *
+     * @param string $Path The path to the directory to be created
+     *
+     * @return void
+     */
+    public function makeDirectory(string $Path)
+    {
+
+        $this->Contents[$Path] = [
+            self::PARAM_TYPE     => self::TYPE_DIRECTORY,
+            self::PARAM_CONTENTS => []
+        ];
+
     }
 
 }
