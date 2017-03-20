@@ -28,5 +28,17 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  */
 interface FileSystemInterface
 {
-    
+
+    /**
+     * Write data to a specified file
+     *
+     * @param string $Path The path to the file to be written
+     * @param string $Data The data to write to the file
+     *
+     * @TODO No errors yet supported
+     *
+     * @return void
+     */
+    function writeToFile(string $Path, string $Data);
+
 }

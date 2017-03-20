@@ -29,8 +29,8 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 class MockFilePointer implements FilePointerInterface
 {
 //     public $Contents;
-//     protected $Name;
-//     protected $ParentDirectory;
+    protected $Path;
+    protected $FileSystem;
 //
 //     /**
 //      * Return the parent directory of the file
@@ -79,7 +79,7 @@ class MockFilePointer implements FilePointerInterface
 //      */
     public function setContents(string $Data)
     {
-        // $this->Contents = $Data;
+        $this->FileSystem->writeToFile($this->Path, $Data);
     }
 //
 //     /**
@@ -92,19 +92,18 @@ class MockFilePointer implements FilePointerInterface
 //         return $this->Name;
 //     }
 //
-//     /**
-//      * Construct a new DummyFile object
-//      *
-//      * @param string             $Name            The name of the file
-//      * @param DirectoryInterface $ParentDirectory The parent directory of the
-//      *                                            file.
-//      */
-//     public function __construct(
-//         string $Name,
-//         DirectoryInterface $ParentDirectory
-//     ) {
-//         $this->Name = $Name;
-//         $this->ParentDirectory = $ParentDirectory;
-//     }
+    /**
+     * Construct a new MockFilePointer object
+     *
+     * @param string              $Path       The path of the referenced file
+     * @param FileSystemInterface $FileSystem The file system used
+     */
+    public function __construct(
+        string $Path,
+        FileSystemInterface $FileSystem
+    ) {
+        $this->Path       = $Path;
+        $this->FileSystem = $FileSystem;
+    }
 
 }

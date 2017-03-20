@@ -28,5 +28,31 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  */
 class MockFileSystem implements FileSystemInterface
 {
+    const PARAM_TYPE     = 'Type';
+    const PARAM_CONTENTS = 'Contents';
+
+    const TYPE_FILE      = 'File';
+    const TYPE_DIRECTORY = 'Directory';
+
+    public $Contents = [];
+
+
+    /**
+     * Write data to a specified file
+     *
+     * @param string $Path The path to the file to be written
+     * @param string $Data The data to write to the file
+     *
+     * @TODO No errors yet supported
+     *
+     * @return void
+     */
+    public function writeToFile(string $Path, string $Data)
+    {
+        $this->Contents[$Path] = [
+            self::PARAM_TYPE     => self::TYPE_FILE,
+            self::PARAM_CONTENTS => $Data
+        ];
+    }
 
 }
