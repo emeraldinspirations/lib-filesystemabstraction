@@ -111,4 +111,36 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Verifies that createDirectory creates an empty directory
+     *
+     * @return void
+     */
+    public function testCreateChildDirectory()
+    {
+        $ChildName = microtime();
+        $ChildPath = $this->Path . DIRECTORY_SEPARATOR . $ChildName;
+        $Pointer = $this->object->createChildDirectory($ChildName);
+        $DirectoryData = [
+            MFS::PARAM_TYPE     => MFS::TYPE_DIRECTORY,
+            MFS::PARAM_CONTENTS => [],
+        ];
+
+        $this->assertEquals(
+            $DirectoryData,
+            $this->FileSystem->Contents[$ChildPath],
+            'Fails when directory not created'
+        );
+
+        $this->assertEquals(
+            $DirectoryData,
+            $this->FileSystem->Contents[$this->Path]
+                [MFS::PARAM_CONTENTS][$ChildName],
+            'Fails when directory not created'
+        );
+
+
+
+    }
+
 }

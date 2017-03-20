@@ -56,7 +56,12 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     public function createChildDirectory(
         string $Name
     ) : DirectoryPointerInterface {
+        $NewPath = $this->Path . DIRECTORY_SEPARATOR . $Name;
 
+        $Pointer = new MockDirectoryPointer($NewPath, $this->FileSystem);
+        $Pointer->createDirectory();
+
+        return $Pointer;
     }
 
     /**
