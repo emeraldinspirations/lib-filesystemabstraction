@@ -29,78 +29,45 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 class MockDirectoryPointer implements DirectoryPointerInterface
 {
 
-    public $Contents;
     protected $Name;
     protected $ParentDirectory;
 
-    function createChildFile(string $Name) : FilePointerInterface {}
-    function createChildDirectory(string $Name) : DirectoryPointerInterface {}
+    /**
+     * Create a file inside directory, return a pointer to that file
+     *
+     * @param string $Name The name of the file to create
+     *
+     * @return FilePointerInterface Pointer to the new file
+     */
+    public function createChildFile(
+        string $Name
+    ) : FilePointerInterface {
 
-    //
-    // /**
-    //  * Return the parent directory of the directory
-    //  *
-    //  * @return DirectoryInterface The parent directory
-    //  */
-    // public function getParentDirectory() : DirectoryInterface
-    // {
-    //     return $this->ParentDirectory;
-    // }
-    //
-    // /**
-    //  * Returns if directory exists
-    //  *
-    //  * @return bool If object exists
-    //  */
-    // function isExsisting() : bool
-    // {
-    //     return ! is_null($this->Contents);
-    // }
-    //
-    // function newChildFile(string $Name) : FileInterface {}
-    // function newChildDirectory(string $Name) : DirectoryInterface {}
-    // function offsetExists($Offset) : bool {}
-    // function offsetGet($Offset) : FileSystemObjectInterface {}
-    // function offsetUnset($Offset) {}
-    // function offsetSet($Offset, $Value) {}
-    // function getIterator() : Traversable {}
-    //
-    // /**
-    //  * Creates directory & parents if not-existing
-    //  *
-    //  * @return void
-    //  */
+    }
+
+    /**
+     * Create a sub-directory inside directory, return a pointer to that
+     * directory
+     *
+     * @param string $Name The name of the directory to create
+     *
+     * @return DirectoryPointerInterface Pointer to new directory
+     */
+    public function createChildDirectory(
+        string $Name
+    ) : DirectoryPointerInterface {
+
+    }
+
+    /**
+     * Creates directory
+     *
+     * @return void
+     */
     public function createDirectory()
     {
         $this->FileSystem->makeDirectory($this->Path);
-    //     if (!$this->isRootDirectory()) {
-    //         $this->getParentDirectory()->createDirectory();
-    //         $this->getParentDirectory()->Contents[$this->Name] = $this;
-    //     }
-    //
-    //     $this->Contents = [];
-    //
     }
-    //
-    // /**
-    //  * Return the name of the directory
-    //  *
-    //  * @return string File name
-    //  */
-    // public function getName() : string
-    // {
-    //     return $this->Name;
-    // }
-    //
-    // /**
-    //  * Returns if directory is root directory
-    //  *
-    //  * @return bool
-    //  */
-    // function isRootDirectory() : bool
-    // {
-    //     return is_null($this->ParentDirectory);
-    // }
 
     /**
      * Construct a new MockDirectoryPointer object

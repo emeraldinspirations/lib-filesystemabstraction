@@ -29,7 +29,23 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
 interface DirectoryPointerInterface
 {
 
+    /**
+     * Create a file inside directory, return a pointer to that file
+     *
+     * @param string $Name The name of the file to create
+     *
+     * @return FilePointerInterface Pointer to the new file
+     */
     function createChildFile(string $Name) : FilePointerInterface;
+
+    /**
+     * Create a sub-directory inside directory, return a pointer to that
+     * directory
+     *
+     * @param string $Name The name of the directory to create
+     *
+     * @return DirectoryPointerInterface Pointer to new directory
+     */
     function createChildDirectory(string $Name) : DirectoryPointerInterface;
 
     /**
