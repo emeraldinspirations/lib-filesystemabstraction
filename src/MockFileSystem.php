@@ -55,4 +55,19 @@ class MockFileSystem implements FileSystemInterface
         ];
     }
 
+
+    /**
+     * Return all the data from a specified file
+     *
+     * @param string $Path The path to the file to be read
+     *
+     * @TODO No errors yet supported
+     *
+     * @return string The contents of the file
+     */
+    public function readCompleteFile(string $Path) : string
+    {
+        return $this->Contents[$Path][self::PARAM_CONTENTS];
+    }
+
 }

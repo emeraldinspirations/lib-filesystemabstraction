@@ -41,4 +41,15 @@ interface FileSystemInterface
      */
     function writeToFile(string $Path, string $Data);
 
+    /**
+     * Return all the data from a specified file
+     *
+     * @param string $Path The path to the file to be read
+     *
+     * @TODO No errors yet supported
+     *
+     * @return string The contents of the file
+     */
+    function readCompleteFile(string $Path) : string;
+
 }

@@ -55,28 +55,24 @@ class MockFilePointer implements FilePointerInterface
 //     {
 //         return ! is_null($this->Contents);
 //     }
-//
-//     /**
-//      * Return the contents of the file
-//      *
-//      * @todo No exceptions yet handled
-//      *
-//      * @return string Contents of the file
-//      */
+
+    /**
+     * Return the contents of the file
+     *
+     * @return string Contents of the file
+     */
     public function getContents() : string
     {
-        // return $this->Contents;
+        return $this->FileSystem->readCompleteFile($this->Path);
     }
-//
-//     /**
-//      * Set the contents of the file
-//      *
-//      * @param string $Data The new contents of the file
-//      *
-//      * @todo No exceptions yet handled
-//      *
-//      * @return void
-//      */
+
+    /**
+     * Set the contents of the file
+     *
+     * @param string $Data The new contents of the file
+     *
+     * @return void
+     */
     public function setContents(string $Data)
     {
         $this->FileSystem->writeToFile($this->Path, $Data);

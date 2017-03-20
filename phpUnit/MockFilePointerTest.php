@@ -67,6 +67,11 @@ class MockFilePointerTest extends \PHPUnit_Framework_TestCase
             $this->FileSystem
         );
 
+        $this->FileSystem->Contents[$this->Path] = [
+            MFS::PARAM_TYPE=>MFS::TYPE_FILE,
+            MFS::PARAM_CONTENTS=>microtime().'OldContents'
+        ];
+
     }
 
     /**
@@ -99,10 +104,6 @@ class MockFilePointerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetContents()
     {
-        $this->FileSystem->Contents[$this->Path] = [
-            MFS::PARAM_TYPE=>MFS::TYPE_FILE,
-            MFS::PARAM_CONTENTS=>microtime().'OldContents'
-        ];
 
         $NewContents = microtime().'NewContents';
 
@@ -115,24 +116,22 @@ class MockFilePointerTest extends \PHPUnit_Framework_TestCase
         );
 
     }
-    //
-    // /**
-    //  * Verifies dummy file has data that can be read
-    //  *
-    //  * @return void
-    //  */
-    // public function testGetContents()
-    // {
-    //     $this->object->Contents = microtime();
-    //     // Fails if DummyFile::Contents does not exist
-    //
-    //     $this->assertEquals(
-    //         $this->object->Contents,
-    //         $this->object->getContents(),
-    //         'Fails if contents not retrieved'
-    //     );
-    //
-    // }
+
+    /**
+     * Verifies dummy file has data that can be read
+     *
+     * @return void
+     */
+    public function testGetContents()
+    {
+
+        $this->assertEquals(
+            $this->FileSystem->Contents[$this->Path][MFS::PARAM_CONTENTS],
+            $this->object->getContents(),
+            'Fails if contents not retrieved'
+        );
+
+    }
     //
     // /**
     //  * Verifies file's existance is based on contents of DummyFile::Contents
