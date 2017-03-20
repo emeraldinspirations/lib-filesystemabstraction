@@ -178,6 +178,7 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testIsExisting()
     {
+
         $this->assertFalse(
             $this->object->isExsisting(),
             'Fails if function returns null'
@@ -189,6 +190,53 @@ class DummyDirectoryTest extends \PHPUnit_Framework_TestCase
             $this->object->isExsisting(),
             'Fails if function returns false regardless of existance'
         );
+
+    }
+
+    /**
+     * Verifies that createDirectory creates an empty directory, and creates
+     * all parent directorties as needed.
+     *
+     * @return void
+     */
+    public function testCreateDirectory()
+    {
+        $Dir[1] = new DummyDirectory('Dir1');
+        $Dir[2] = new DummyDirectory('Dir2', $Dir[1]);
+        $Dir[3] = new DummyDirectory('Dir3', $Dir[2]);
+        $Dir[4] = new DummyDirectory('Dir4', $Dir[3]);
+
+        foreach ($Dir as $DirA) {
+            $this->assertFalse($DirA->isExsisting());
+        }
+
+        $Dir[4]->createDirectory();
+
+        foreach ($Dir as $DirA) {
+            $this->assertTrue($DirA->isExsisting());
+        }
+
+        $this->assertEquals(
+            [
+                $Dir[1]->Contents['Dir2']->getName(),
+                $Dir[2]->Contents['Dir3']->getName(),
+                $Dir[3]->Contents['Dir4']->getName(),
+            ],
+            [
+                'Dir2',
+                'Dir3',
+                'Dir4',
+            ]
+        );
+
+        $this->assertEquals(
+            count($Dir[1]->Contents)
+            + count($Dir[2]->Contents)
+            + count($Dir[3]->Contents)
+            + count($Dir[4]->Contents),
+            3
+        );
+
     }
 
 }

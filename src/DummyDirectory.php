@@ -68,6 +68,12 @@ class DummyDirectory implements DirectoryInterface
      */
     public function createDirectory()
     {
+        if (!$this->isRootDirectory()) {
+            $this->getParentDirectory()->createDirectory();
+            $this->getParentDirectory()->Contents[$this->Name] = $this;
+        }
+
+        $this->Contents = [];
 
     }
 
