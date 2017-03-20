@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Container for FileSystemObjectInterface
+ * Container for DirectoryPointerInterface
  *
  * PHP Version 7
  *
@@ -16,7 +16,7 @@
 namespace emeraldinspirations\library\fileSystemAbstraction;
 
 /**
- * Most basic I/O object
+ * Pointer to a directory in a file system
  *
  * @category  Library
  * @package   Lib-filesystemabstraction
@@ -26,21 +26,11 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  * @version   GIT: $Id$ In Development.
  * @link      https://github.com/emeraldinspirations/lib-filesystemabstraction
  */
-interface DirectoryInterface extends
-    FileSystemObjectInterface,
-    \IteratorAggregate,
-    \ArrayAccess
+interface DirectoryPointerInterface
 {
 
-    function newChildFile(string $Name) : FileInterface;
-    function newChildDirectory(string $Name) : DirectoryInterface;
-
-    /**
-     * Returns if directory is root directory
-     *
-     * @return bool
-     */
-    function isRootDirectory() : bool;
+    function createChildFile(string $Name) : FilePointerInterface;
+    function createChildDirectory(string $Name) : DirectoryPointerInterface;
 
     /**
      * Creates directory & parents if not-existing
