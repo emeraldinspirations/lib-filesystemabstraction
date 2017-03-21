@@ -31,7 +31,12 @@ use \emeraldinspirations\library\fileSystemAbstraction\MockFileSystem as MFS;
 class MockDirectoryPointer implements DirectoryPointerInterface
 {
 
-    protected $Name;
+    /**
+     * The path of the referenced directory
+     *
+     * @var string
+     */
+    protected $Path;
 
     /**
      * Container for MockFileSystem
@@ -85,6 +90,16 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     public function createDirectory()
     {
         $this->MockFileSystem->makeDirectory($this->Path);
+    }
+
+    /**
+     * Returns the path of the referenced directory
+     *
+     * @return string
+     */
+    public function getPath() : string
+    {
+        return $this->Path;
     }
 
     /**

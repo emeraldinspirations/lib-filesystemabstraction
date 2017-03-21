@@ -57,4 +57,11 @@ interface DirectoryPointerInterface
      */
     function createDirectory();
 
+    /**
+     * Returns the path of the referenced directory
+     *
+     * @return string
+     */
+    function getPath() : string;
+
 }
