@@ -15,6 +15,8 @@
 
 namespace emeraldinspirations\library\fileSystemAbstraction;
 
+use \emeraldinspirations\library\fileSystemAbstraction\MockFileSystem as MFS;
+
 /**
  * A dummy directory
  *
@@ -30,7 +32,13 @@ class MockDirectoryPointer implements DirectoryPointerInterface
 {
 
     protected $Name;
-    protected $ParentDirectory;
+
+    /**
+     * Container for MockFileSystem
+     *
+     * @var MockFileSystem
+     */
+    protected $MockFileSystem;
 
     /**
      * Create a file inside directory, return a pointer to that file
@@ -56,10 +64,15 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     public function createChildDirectory(
         string $Name
     ) : DirectoryPointerInterface {
-        $NewPath = $this->Path . DIRECTORY_SEPARATOR . $Name;
+        $NewPath               = $this->Path . DIRECTORY_SEPARATOR . $Name;
+        $MockDirectoryContents = & $this->MockFileSystem->getContents();
 
-        $Pointer = new MockDirectoryPointer($NewPath, $this->FileSystem);
+        $Pointer = new MockDirectoryPointer($NewPath, $this->MockFileSystem);
         $Pointer->createDirectory();
+
+        $NewDirectory          = & $MockDirectoryContents[$NewPath];
+        $ThisDirectory         = & $MockDirectoryContents[$this->Path];
+        $ThisDirectory[MFS::PARAM_CONTENTS][$Name] = & $NewDirectory;
 
         return $Pointer;
     }
@@ -71,22 +84,22 @@ class MockDirectoryPointer implements DirectoryPointerInterface
      */
     public function createDirectory()
     {
-        $this->FileSystem->makeDirectory($this->Path);
+        $this->MockFileSystem->makeDirectory($this->Path);
     }
 
     /**
      * Construct a new MockDirectoryPointer object
      *
-     * @param string              $Path       The path of the referenced
-     *                                        directory
-     * @param FileSystemInterface $FileSystem The file system used
+     * @param string                  $Path           The path of the referenced
+     * directory
+     * @param MockFileSystemInterface $MockFileSystem The file system used
      */
     public function __construct(
         string $Path,
-        FileSystemInterface $FileSystem
+        MockFileSystemInterface $MockFileSystem
     ) {
-        $this->Path       = $Path;
-        $this->FileSystem = $FileSystem;
+        $this->Path           = $Path;
+        $this->MockFileSystem = $MockFileSystem;
     }
 
 }

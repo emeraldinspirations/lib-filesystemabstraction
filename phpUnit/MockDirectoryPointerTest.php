@@ -118,6 +118,7 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateChildDirectory()
     {
+        $this->object->createDirectory();
         $ChildName = microtime();
         $ChildPath = $this->Path . DIRECTORY_SEPARATOR . $ChildName;
         $Pointer = $this->object->createChildDirectory($ChildName);

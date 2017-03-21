@@ -26,7 +26,7 @@ namespace emeraldinspirations\library\fileSystemAbstraction;
  * @version   GIT: $Id$ In Development.
  * @link      https://github.com/emeraldinspirations/lib-filesystemabstraction
  */
-class MockFileSystem implements FileSystemInterface
+class MockFileSystem implements MockFileSystemInterface
 {
     const PARAM_TYPE     = 'Type';
     const PARAM_CONTENTS = 'Contents';
@@ -86,4 +86,14 @@ class MockFileSystem implements FileSystemInterface
 
     }
 
+    /**
+     * Retern the reference to the Contents variable
+     *
+     * @return array
+     */
+    public function &getContents() : array
+    {
+        return $this->Contents;
+    }
+    
 }
