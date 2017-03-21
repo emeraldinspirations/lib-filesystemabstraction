@@ -55,6 +55,16 @@ class MockFilePointer implements FilePointerInterface
     }
 
     /**
+     * Returns the path of the referenced file
+     *
+     * @return string
+     */
+    public function getPath() : string
+    {
+        return $this->Path;
+    }
+
+    /**
      * Construct a new MockFilePointer object
      *
      * @param string              $Path       The path of the referenced file

@@ -134,4 +134,20 @@ class MockFilePointerTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    /**
+     * Verifies that path is retained and returned on getPath
+     *
+     * @return void
+     */
+    public function testGetPath()
+    {
+
+        $this->assertEquals(
+            $this->Path,
+            $this->object->getPath(),
+            'Fails if function not defined, or returns wrong value'
+        );
+
+    }
+
 }
