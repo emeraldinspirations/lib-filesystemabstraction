@@ -153,7 +153,7 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
             $DirectoryData,
             $this->FileSystem->Contents[$this->Path]
                 [MFS::PARAM_CONTENTS][$ChildName],
-            'Fails when directory not created'
+            'Fails when directory not referenced in parent'
         );
 
         $this->assertInstanceOf(
@@ -172,6 +172,57 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
             'Fails if wrong pointer returned'
         );
 
+    }
+
+    /**
+     * Verifies that createChildFile creates an empty file
+     *
+     * @return void
+     */
+    public function testCreateChildFile()
+    {
+
+        $this->object->createDirectory();
+        $ChildName = microtime();
+        $ChildPath = $this->Path . DIRECTORY_SEPARATOR . $ChildName;
+        $FileData  = [
+            MFS::PARAM_TYPE     => MFS::TYPE_FILE,
+            MFS::PARAM_CONTENTS => '',
+        ];
+
+        $Pointer = $this->object->createChildFile($ChildName);
+        // Fails if function does not exist
+
+        $this->assertInstanceOf(
+            MockFilePointer::class,
+            $Pointer,
+            'Fails if pointer not returned'
+        );
+
+        $this->assertEquals(
+            $FileData,
+            $this->FileSystem->Contents[$ChildPath],
+            'Fails when file not created'
+        );
+
+        $this->assertEquals(
+            $FileData,
+            $this->FileSystem->Contents[$this->Path]
+                [MFS::PARAM_CONTENTS][$ChildName],
+            'Fails when file not referenced in parent'
+        );
+
+        $this->assertEquals(
+            [
+                'Path' => $ChildPath,
+                'Contents' => '',
+            ],
+            [
+                'Path' => $Pointer->getPath(),
+                'Contents' => $Pointer->getContents(),
+            ],
+            'Fails if wrong pointer returned'
+        );
 
     }
 

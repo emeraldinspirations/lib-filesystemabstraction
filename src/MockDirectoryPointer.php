@@ -46,6 +46,35 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     protected $MockFileSystem;
 
     /**
+     * Returns the new path of a child element (directory / file)
+     *
+     * @param string $ChildName The name of a child element
+     *
+     * @return string
+     */
+    protected function getChildPath($ChildName)
+    {
+        return $this->Path . DIRECTORY_SEPARATOR . $ChildName;
+    }
+
+    /**
+     * Add a child element (directory / file) to the contents of a directory
+     * via reference.
+     *
+     * @param string $ChildName The name of the child element
+     * @param string $ChildPath The path of the child element
+     *
+     * @return void
+     */
+    protected function addChildToContents($ChildName, $ChildPath)
+    {
+        $MockDirectoryContents = & $this->MockFileSystem->getContents();
+        $NewChildContents      = & $MockDirectoryContents[$ChildPath];
+        $ThisDirectory         = & $MockDirectoryContents[$this->Path];
+        $ThisDirectory[MFS::PARAM_CONTENTS][$ChildName] = & $NewChildContents;
+    }
+
+    /**
      * Create a file inside directory, return a pointer to that file
      *
      * @param string $Name The name of the file to create
@@ -55,6 +84,14 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     public function createChildFile(
         string $Name
     ) : FilePointerInterface {
+        $NewPath               = $this->getChildPath($Name);
+
+        $Pointer = new MockFilePointer($NewPath, $this->MockFileSystem);
+        $Pointer->setContents('');
+
+        $this->addChildToContents($Name, $NewPath);
+
+        return $Pointer;
 
     }
 
@@ -69,15 +106,12 @@ class MockDirectoryPointer implements DirectoryPointerInterface
     public function createChildDirectory(
         string $Name
     ) : DirectoryPointerInterface {
-        $NewPath               = $this->Path . DIRECTORY_SEPARATOR . $Name;
-        $MockDirectoryContents = & $this->MockFileSystem->getContents();
+        $NewPath               = $this->getChildPath($Name);
 
         $Pointer = new MockDirectoryPointer($NewPath, $this->MockFileSystem);
         $Pointer->createDirectory();
 
-        $NewDirectory          = & $MockDirectoryContents[$NewPath];
-        $ThisDirectory         = & $MockDirectoryContents[$this->Path];
-        $ThisDirectory[MFS::PARAM_CONTENTS][$Name] = & $NewDirectory;
+        $this->addChildToContents($Name, $NewPath);
 
         return $Pointer;
     }

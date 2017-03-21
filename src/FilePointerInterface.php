@@ -48,4 +48,11 @@ interface FilePointerInterface {
      */
     function setContents(string $Data);
 
+    /**
+     * Returns the path of the referenced file
+     *
+     * @return string
+     */
+    function getPath() : string;
+
 }
