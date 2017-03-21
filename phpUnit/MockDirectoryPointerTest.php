@@ -156,6 +156,21 @@ class MockDirectoryPointerTest extends \PHPUnit_Framework_TestCase
             'Fails when directory not created'
         );
 
+        $this->assertInstanceOf(
+            MockDirectoryPointer::class,
+            $Pointer,
+            'Fails if pointer not returned'
+        );
+
+        $this->assertEquals(
+            [
+                'Path' => $ChildPath
+            ],
+            [
+                'Path' => $Pointer->getPath(),
+            ],
+            'Fails if wrong pointer returned'
+        );
 
 
     }
